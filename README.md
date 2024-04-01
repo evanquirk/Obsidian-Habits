@@ -1,32 +1,81 @@
-#### Input Handling (input.js):
+# Obsidian Habits
 
-**askQuestion**(*question, defaultValue*): Prompts the user with a question and returns the answer, with an optional default value.
-**askToUpdate**(*question, currentValue*): Asks the user if they want to update the existing value.
+This is a command-line(*) application designed to help users keep track of their daily activities, including tasks, mood, health metrics, and more, by updating a markdown file with YAML front matter for Obsidian
 
-#### Slider Input Handling (slider.js):
+## Features
 
-**askSlider**(*currentValue, max, label*): A generic function that handles slider-like input for mood, water intake, energy level, etc., within a specified range.
+- Collects data for various daily activities such as mood, health metrics, exercise, meals, and tasks.
+- Updates a markdown file with YAML front matter containing the collected data.
+- Supports customization through configuration files for defining data collection functions and task mappings.
+- Automates property links and input through folder routing data selection.
 
-#### Data Collection Helpers (inputHelpers.js):
+## Installation
 
-**getData**(key, message, existingData, processor): Generalizes the process of checking if data exists, prompting for an update, and then collecting the data.
+1. Clone this repository to your local machine.
+2. Install Node.js if not already installed.
+3. Navigate to the project directory in your terminal.
+4. Run `npm install` to install dependencies.
 
-#### Individual Data Collection Functions (dataCollectionFunctions.js):
+## Usage
 
-Functions for specific data collections, e.g., collectWakeUp, collectMood, collectWaterIntake, etc., utilizing getData and, where applicable, askSlider.
+1. Configure the application by editing the configuration files in the `config` directory to match your own desired tracking metrics.
+2. Update `.env` file with your own API Key, Lattitude/Longitude, and file paths.
+2. Run the application using the command `node index.js <task> <date>`, where:
+   - `<task>` is the task you want to perform (e.g., vitamins, food, mood).
+   - `<date>` is the date for which the data is being updated (e.g., today, yesterday, or a specific date in the format YYYY-MM-DD). Left empty will return for today.
+3. Follow the prompts to provide input for the selected task.
+4. The application will update the markdown file with the collected data.
 
-#### Orchestrator Function (orchestrator.js):
+## Configuration
 
-orchestrator(functions, existingData, date): Manages the collection of necessary data using the specified functions for the given date.
+- `config/dataConfig.js`: Contains data collection functions for various tasks.
+- `config/functionConfig.js`: Maps task names to corresponding data collection functions.
+- Additional configuration files can be added as needed.
 
-#### Weather Data Fetching (weather.js):
+## File Structure
+```
+├── config/
+│ ├── dataConfig.js
+│ └── functionConfig.js
+├── dataCollection/
+│ ├── boolean.js
+│ ├── index.js
+│ ├── multiSelect.js
+│ ├── number.js
+│ ├── select.js
+│ ├── slider.js
+│ └── text.js
+├── helpers/
+│ ├── fileUpdater.js
+│ └── orchestrator.js
+├── inputHandling/
+│ ├── inputHandling.js
+│ └── sliderInputHandling.js
+├── services/
+│ ├── bookService.js
+│ ├── foodService.js
+│ ├── weatherService.js
+│ └── workoutService.js
+├── tests/
+├── index.js
+├── package.json
+├── README.md
+└── .env (will need to be created locally)
+```
 
-fetchWeatherData(date): Fetches weather-related data for the specified date.
+## Environment Variables
+VISUAL_CROSSING_API_KEY= *(required for Weather and Moon Phase Data)*
 
-#### File Updater (fileUpdater.js):
+LATITUDE= *(required for Weather and Moon Phase Data)*
 
-updateMarkdownFile(filePath, data): Updates the markdown file with the collected data.
+LONGITUDE= *(required for Weather and Moon Phase Data)*
 
-#### Main File (e.g., dailyTask.js):
+NOTES_PATH= *(Complete path to the Daily Notes Folder. To Note, nested structure is:*
 
-Uses the orchestrator to collect and update data for a specific note type and date, based on the configured functions.
+`${PATH}/YYYY/MM/YYYY-MM-DD.md` )
+
+EXERCISE_PATH=*(path to exercise folder)*
+
+FOOD_PATH=*(path to recipes directory)*
+
+BOOK_PATH=*(path to books directory)*
