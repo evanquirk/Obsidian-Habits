@@ -19,7 +19,7 @@ This is a command-line(*) application designed to help users keep track of their
 ## Usage
 
 1. Configure the application by editing the configuration files in the `config` directory to match your own desired tracking metrics.
-2. Update `.env` file with your own API Key, Lattitude/Longitude, and file paths.
+2. Update `.env` file with your own API Key, Lattitude/Longitude, and directory paths within Obsidian.
 2. Run the application using the command `node index.js <task> <date>`, where:
    - `<task>` is the task you want to perform (e.g., vitamins, food, mood).
    - `<date>` is the date for which the data is being updated (e.g., today, yesterday, or a specific date in the format YYYY-MM-DD). Left empty will return for today.
@@ -34,33 +34,27 @@ This is a command-line(*) application designed to help users keep track of their
 
 ## File Structure
 ```
-├── config/
-│ ├── dataConfig.js
-│ └── functionConfig.js
-├── dataCollection/
-│ ├── boolean.js
-│ ├── index.js
-│ ├── multiSelect.js
-│ ├── number.js
-│ ├── select.js
-│ ├── slider.js
-│ └── text.js
-├── helpers/
-│ ├── fileUpdater.js
-│ └── orchestrator.js
-├── inputHandling/
-│ ├── inputHandling.js
-│ └── sliderInputHandling.js
-├── services/
-│ ├── bookService.js
-│ ├── foodService.js
-│ ├── weatherService.js
-│ └── workoutService.js
-├── tests/
+.
+├── src/
+│   ├── config/
+│   │   ├── dataConfig.js
+│   │   └── functionConfig.js
+│   ├── helpers/
+│   │   ├── dataHandlers.js
+│   │   ├── fileUpdater.js
+│   │   ├── inputHandler.js
+│   │   └── orchestrator.js
+│   └── services/
+│       ├── bookService.js
+│       ├── foodService.js
+│       ├── weatherService.js
+│       └── workoutService.js
+├── .env.template
+├── .gitignore
 ├── index.js
+├── package-lock.json
 ├── package.json
-├── README.md
-└── .env (will need to be created locally)
+└── README.md
 ```
 
 ## Environment Variables
