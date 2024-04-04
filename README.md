@@ -20,9 +20,11 @@ This is a command-line(*) application designed to help users keep track of their
 
 1. Configure the application by editing the configuration files in the `config` directory to match your own desired tracking metrics.
 2. Update `.env` file with your own API Key, Lattitude/Longitude, and directory paths within Obsidian.
-2. Run the application using the command `node index.js <task> <date>`, where:
+2. Run the application using the command `node index.js -t <task> -d <date>`, where:
    - `<task>` is the task you want to perform (e.g., vitamins, food, mood).
-   - `<date>` is the date for which the data is being updated (e.g., today, yesterday, or a specific date in the format YYYY-MM-DD). Left empty will return for today.
+   - `<date>` is the date for which the data is being updated (e.g., today, yesterday, or a specific date in the format YYYY-MM-DD). 
+   If no date is given, it will return for today.
+   If both arguements are not passed, a CLI walkthrough will ask you for which tasks you are looking to complete.
 3. Follow the prompts to provide input for the selected task.
 4. The application will update the markdown file with the collected data.
 
@@ -37,21 +39,21 @@ This is a command-line(*) application designed to help users keep track of their
 .
 ├── src/
 │   ├── config/
-│   │   ├── dataConfig.js
-│   │   └── functionConfig.js
+│   │   ├── dataConfig.ts
+│   │   └── functionConfig.ts
 │   ├── helpers/
-│   │   ├── dataHandlers.js
-│   │   ├── fileUpdater.js
-│   │   ├── inputHandler.js
-│   │   └── orchestrator.js
+│   │   ├── dataHandlers.ts
+│   │   ├── fileUpdater.ts
+│   │   ├── inputHandler.ts
+│   │   └── orchestrator.ts
 │   └── services/
-│       ├── bookService.js
-│       ├── foodService.js
-│       ├── weatherService.js
-│       └── workoutService.js
+│       ├── bookService.ts
+│       ├── foodService.ts
+│       ├── weatherService.ts
+│       └── workoutService.ts
 ├── .env.template
 ├── .gitignore
-├── index.js
+├── index.ts
 ├── package-lock.json
 ├── package.json
 └── README.md
