@@ -1,16 +1,17 @@
 {
   "dependencies": {
+    "@types/node": "^20.12.4",
     "axios": "^1.6.8",
     "date-fns": "^3.6.0",
     "dotenv": "^16.4.5",
     "js-yaml": "^4.1.0",
-    "keypress": "^0.2.1"
+    "keypress": "^0.2.1",
+    "typescript": "^5.4.4"
   },
   "name": "obsidian-habits",
   "description": "A command line habit tracker for Obsidian",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "jest"
   },
