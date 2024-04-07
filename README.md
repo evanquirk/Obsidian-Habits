@@ -32,30 +32,6 @@ This is a command-line(*) application designed to help users keep track of their
 - `config/functionConfig.js`: Maps task names to corresponding data collection functions.
 - Additional configuration files can be added as needed.
 
-## File Structure
-```
-.
-├── src/
-│   ├── config/
-│   │   ├── dataConfig.js
-│   │   └── functionConfig.js
-│   ├── helpers/
-│   │   ├── dataHandlers.js
-│   │   ├── fileUpdater.js
-│   │   ├── inputHandler.js
-│   │   └── orchestrator.js
-│   └── services/
-│       ├── bookService.js
-│       ├── foodService.js
-│       ├── weatherService.js
-│       └── workoutService.js
-├── .env.template
-├── .gitignore
-├── index.js
-├── package-lock.json
-├── package.json
-└── README.md
-```
 
 ## Environment Variables
 VISUAL_CROSSING_API_KEY= *(required for Weather and Moon Phase Data)*
