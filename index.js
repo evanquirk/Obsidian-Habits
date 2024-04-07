@@ -1,31 +1,21 @@
-const { format } = require('date-fns');
-const fs = require('fs');
-const yaml = require('js-yaml');
-const path = require('path');
 require('dotenv').config();
 const setupYargs = require('./src/config/cliConfig');
 const { promptForMissing } = require('./src/utils/inquirePrompt')
 const { parseDate } = require('./src/utils/dateUtility');
+const handleFileProcessing  = require('./src/utils/fileManager');
 
 async function main() {
-    let argv = setupYargs().argv;
+    let argv = await setupYargs().argv;
     argv = await promptForMissing(argv);
 
     const date = parseDate(argv.date);
     const baseFilePath = process.env.NOTES_PATH;
-    const dateString = format(date, 'yyyy/MM');
-    const filePath = path.join(baseFilePath, dateString, `${format(date, 'yyyy-MM-dd')}.md`);
-    console.log(date)
 
-    let existingData = {};
-    if (fs.existsSync(filePath)) {
-        const content = fs.readFileSync(filePath, 'utf8');
-        const match = content.match(/^---\n([\s\S]*?)\n---/);
-        if (match) {
-            existingData = yaml.load(match[1]);
-            console.log('Existing data:', existingData);
-        }
+    if (!baseFilePath) {
+        throw new Error('NOTES_PATH environment variable is not set.');
     }
+
+    handleFileProcessing(baseFilePath, date);
 }
 
 main().catch(err => {
