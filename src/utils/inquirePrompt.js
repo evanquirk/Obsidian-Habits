@@ -1,6 +1,20 @@
 // utils/inquirer.js
 
 const inquirer = require('inquirer');
+const yaml = require('js-yaml');
+
+const editYAML = async (yamlContent) => {
+    const yamlData = yaml.load(yamlContent);
+    const questions = Object.keys(yamlData).map(key => ({
+        type: 'input',
+        name: key,
+        message: `Edit ${key}:`,
+        default: yamlData[key], // pre-fill the current value
+    }));
+
+    const answers = await inquirer.prompt(questions);
+    return yaml.dump(answers);
+};
 
 const promptForMissing = async (args) => {
     const questions = [];
@@ -28,4 +42,4 @@ const promptForMissing = async (args) => {
     };
 }
 
-module.exports = { promptForMissing };
+module.exports = { promptForMissing, editYAML };
